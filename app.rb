@@ -2,19 +2,17 @@ require_relative 'config/environment'
 
 class App < Sinatra::Base
 
-  get '/newteam' do
-    erb :newteam
-  end
-
-  post '/team' do
-    @name = params[:name]
-    @coach = params[:coach]
-    @pg = params[:pg]
-    @sg = params[:sg]
-    @pf = params[:pf]
-    @sf = params[:sf]
-    @c = params[:c]
-    erb :team
-  end
+  get '/' do
+      erb :index
+    end
+  
+    get '/new' do
+      erb :create_puppy
+    end
+  
+    post '/puppy' do
+      @puppy = Puppy.new(params['name'], params['breed'], params['months_old'])
+      erb :display_puppy
+    end
 
 end
